@@ -11,6 +11,11 @@ public class ChatBot {
 		Scanner remainder5 = new Scanner(System.in);
 		Scanner remainder7 = new Scanner(System.in);
 		int YourAge = ((remainder3.nextInt() * 70 + remainder5.nextInt() * 21 + remainder7.nextInt() * 15) % 105);
-		System.out.println("Your age is " + YourAge + "; thats a good time to start programming!");
+		System.out.println("Your age is " + YourAge + "; thats a good time to start programming!" + "\n" + "Now i will prove to you that i can count to any number you want.");
+		Scanner n = new Scanner(System.in);
+		int number = n.nextInt();
+		for(int i = 0; i <= number; i++){
+			System.out.println(i + "!");
+		}
 	}
 }
