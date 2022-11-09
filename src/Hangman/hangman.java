@@ -19,44 +19,49 @@ public class hangman {
 			arr[i] = "-";
 		}
 		Scanner userAnswer = new Scanner(System.in);
-		while (attempts>0) {
-			// System.out.println("Type 'play'; to play the game, 'exit' to quit:");
-			// String function = userAnswer.nextLine();
-
-			System.out.println(Arrays.toString(arr) + "\n" + "Input a letter ");
-			String letter = userAnswer.nextLine();
-			boolean found = Arrays.asList(guess).contains(letter);
-			if (letter.length() > 1) {
-				System.out.println("Input only one letter");
-				continue;
-			}
-			else{
-				if (found == true) {
-					System.out.println("You've already guessed this letter.");
-					guessesLetter = guessesLetter - 1;
-				}
-				for (int i = 0; i < splittedWord.length; i++) {
-					if (answer.charAt(i) == letter.charAt(0)) {
-						arr[i] = letter;
-						guessesLetter++;
-						guess[i] = letter;
+		System.out.println("Type 'play'; to play the game, 'exit' to quit:");
+		String function = userAnswer.nextLine();
+		while (true) {
+			if (function.equals("play")) {
+				while (attempts>0) {
+					System.out.println(Arrays.toString(arr) + "\n" + "Input a letter ");
+					String letter = userAnswer.nextLine();
+					boolean found = Arrays.asList(guess).contains(letter);
+					if (letter.length() > 1) {
+						System.out.println("Input only one letter");
+						continue;
 					}
-					if (answer.indexOf(letter) == -1){
-						guess[i] = letter;
+					else{
+						if (found == true) {
+							System.out.println("You've already guessed this letter.");
+							guessesLetter = guessesLetter - 1;
+						}
+						for (int i = 0; i < splittedWord.length; i++) {
+							if (answer.charAt(i) == letter.charAt(0)) {
+								arr[i] = letter;
+								guessesLetter++;
+								guess[i] = letter;
+							}
+							if (answer.indexOf(letter) == -1){
+								guess[i] = letter;
+							}
+						}
+					}
+					if (guessesLetter == arr.length) {
+						System.out.println("You guessed the word!" + "\n" + "You survived!");
+						break;
+					}
+					if (attempts == 0) {
+						System.out.println("You lost!");
 					}
 				}
+				userAnswer.close();
 			}
-			if (guessesLetter == arr.length) {
-				System.out.println("You guessed the word!" + "\n" + "You survived!");
+			if (function.equals("exit")) {
 				break;
 			}
-			if (attempts == 0) {
-				System.out.println("You lost!");
-			}
 		}
-		userAnswer.close();
-	}
-		
+	}	
 	
 
 
