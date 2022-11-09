@@ -10,26 +10,48 @@ public class hangman {
 		Random random = new Random();
 		int index = random.nextInt(words.length);
 		String answer = words[index];
-		Scanner userAnswer = new Scanner(System.in);
 		char[] splittedWord = answer.toCharArray();
-		String guesses = "";
 		int attempts = 7;
-		String str = "-";
-		String repeat = repeat((splittedWord.length - 2), "-");
-
-		System.out.println("Guess the word " + splittedWord[0] + splittedWord[1] + repeat);
-
-		if (userAnswer.nextLine().equals(answer)) {
-			System.out.println("You survived!");
+		String[] arr = new String[splittedWord.length];
+		int guesses = 0;
+		for (int i = 0; i < splittedWord.length; i++){
+			arr[i] = "-";
 		}
-		else {
-			System.out.println("You lost!");
+		Scanner userAnswer = new Scanner(System.in);
+		while (attempts>0) {
+			System.out.println(Arrays.toString(arr) + "\n" + "Input a letter ");
+			String letter = userAnswer.nextLine();
+			if (letter.length() > 2) {
+				System.out.println("Input only one letter");
+			}
+			if (answer.indexOf(letter) == -1){
+				System.out.println("That letter doesn't appear in the word");
+				attempts = attempts -1;
+			}
+			else{
+				for (int i = 0; i < splittedWord.length; i++) {
+					if (answer.charAt(i) == letter.charAt(0)) {
+						arr[i] = letter;
+						guesses++;
+					}
+				}
+			}
+			if (guesses == answer.length()) {
+				System.out.println("Thanks for playing!" + "\n" + "We'll see how well you did in the next stage");
+				break;
+			}
 		}
 		userAnswer.close();
 	}
+		
+	
+
+
+
 
 	public static String repeat(int count, String with) {
 		return new String(new char[count]).replace("\0", with);
 	}
+	
 	
 }
