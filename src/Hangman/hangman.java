@@ -20,23 +20,19 @@ public class hangman {
 		}
 		Scanner userAnswer = new Scanner(System.in);
 		while (attempts>0) {
-			System.out.println(attempts);
-			System.out.println(guessesLetter);
+			// System.out.println("Type 'play'; to play the game, 'exit' to quit:");
+			// String function = userAnswer.nextLine();
+
 			System.out.println(Arrays.toString(arr) + "\n" + "Input a letter ");
 			String letter = userAnswer.nextLine();
+			boolean found = Arrays.asList(guess).contains(letter);
 			if (letter.length() > 1) {
 				System.out.println("Input only one letter");
 				continue;
 			}
-			if (answer.indexOf(letter) == -1){
-				System.out.println("That letter doesn't appear in the word");
-				attempts = attempts -1;
-			}
 			else{
-				boolean found = Arrays.asList(guess).contains(letter);
 				if (found == true) {
-					System.out.println("No improvements");
-					attempts = attempts - 1;
+					System.out.println("You've already guessed this letter.");
 					guessesLetter = guessesLetter - 1;
 				}
 				for (int i = 0; i < splittedWord.length; i++) {
@@ -45,9 +41,12 @@ public class hangman {
 						guessesLetter++;
 						guess[i] = letter;
 					}
+					if (answer.indexOf(letter) == -1){
+						guess[i] = letter;
+					}
 				}
 			}
-			if (guessesLetter == answer.length()) {
+			if (guessesLetter == arr.length) {
 				System.out.println("You guessed the word!" + "\n" + "You survived!");
 				break;
 			}
